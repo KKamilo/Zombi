@@ -10,9 +10,6 @@ public class Mover : MonoBehaviour
     float fuersa = 250f;
     int salto = 0;
     public bool canJump = false;
-    //Enemigo
-    
-
     void Start()
     {
         int num = Random.Range(4, 10);// da un numero ramdon para la creacion de Aldeanos y enemigos
