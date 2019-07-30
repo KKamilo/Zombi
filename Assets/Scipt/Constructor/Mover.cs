@@ -7,7 +7,8 @@ public class Mover : MonoBehaviour
     //declaracion de variables
     float ejeX;
     float speed = 5;
-    public float fuersa = 250f;
+    float fuersa = 250f;
+    int salto = 0;
     public bool canJump = false;
     //Enemigo
     
@@ -51,6 +52,7 @@ public class Mover : MonoBehaviour
         }
         if (Input.GetKeyUp(KeyCode.Space))
         {
+            salto = salto + 1; //contador de salto
             Jump();
             canJump = false;
         }
@@ -138,16 +140,17 @@ public class Mover : MonoBehaviour
             return "Hola me llamo " + name[id] + " y tengo " + años + " años";
         }
     }
-    void Jump()
+    void Jump() //aplica la fuersa para el salto
     {
-        if (canJump)
+        if (canJump || salto<=2)// permite un salto y doble salto
             this.GetComponent<Rigidbody>().AddForce(Vector3.up * fuersa);
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision) //Chequea una colicion con el terreno para poder saltar
     {
         if (collision.transform.name== "Terreno")
         {
             canJump = true;
+            salto = 0;
         }
     }
 }
